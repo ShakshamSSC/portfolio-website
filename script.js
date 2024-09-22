@@ -36,22 +36,5 @@ document.querySelector('.slides').appendChild(firstSlideClone);
 // Adjust totalSlides after cloning
 totalSlides++;
 
-document.addEventListener("DOMContentLoaded", function() {
-    const quoraSection = document.getElementById('quora-answers');
-    const highlightText = document.querySelector('.highlight-text');
 
-    // Observer to trigger highlight when section is in view
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                setTimeout(() => {
-                    highlightText.classList.add('highlighted');
-                }, 4000); // Highlight after 4 seconds
-                observer.unobserve(quoraSection); // Stop observing after it has been highlighted
-            }
-        });
-    });
-
-    observer.observe(quoraSection);
-});
 

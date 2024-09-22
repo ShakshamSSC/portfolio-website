@@ -4,6 +4,7 @@ body {
     margin: 0;
     padding: 0;
     background-color: #f4f4f4;
+    overflow-x: hidden; /* Prevent horizontal overflow */
 }
 
 header {
@@ -29,8 +30,6 @@ header h1 {
     background-color: yellow; /* Highlight color */
 }
 
-
-/* Navigation Styles */
 /* Navigation Styles */
 nav {
     background-color: rgba(51, 51, 51, 0.9); /* Initial background with some opacity */
@@ -74,9 +73,6 @@ nav ul li a:hover {
     border-radius: 5px; /* Rounded corners */
 }
 
-
-
-
 /* Feedback Section */
 .feedback-container {
     display: flex;
@@ -85,6 +81,7 @@ nav ul li a:hover {
     width: 100%;
     padding: 40px;
     box-sizing: border-box;
+    flex-wrap: wrap; /* Allow wrapping */
 }
 
 .feedback-photo {
@@ -127,7 +124,7 @@ nav ul li a:hover {
     }
 
     .feedback-photo img {
-        width: 70%;
+        width: 80%; /* Adjusted to prevent overflow */
         margin-bottom: 20px;
     }
 
@@ -148,6 +145,7 @@ nav ul li a:hover {
     padding: 40px;
     box-sizing: border-box;
     width: 100%;
+    flex-wrap: wrap; /* Allow wrapping */
 }
 
 .playlist-text {
@@ -195,7 +193,7 @@ nav ul li a:hover {
 
     .playlist-video iframe {
         width: 100%;
-        height: 250px;
+        height: 250px; /* Adjust for smaller screens */
     }
 }
 
@@ -207,6 +205,7 @@ nav ul li a:hover {
     padding: 40px;
     box-sizing: border-box;
     width: 100%;
+    flex-wrap: wrap; /* Prevent overflow */
 }
 
 .youtube-videos {
@@ -250,38 +249,6 @@ nav ul li a:hover {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Slider control buttons (if needed) */
-.prev, .next {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background-color: rgba(0, 0, 0, 0.5);
-    color: white;
-    border: none;
-    padding: 10px;
-    cursor: pointer;
-    z-index: 1;
-    font-size: 18px;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.prev {
-    left: 10px;
-}
-
-.next {
-    right: 10px;
-}
-
-.prev:hover, .next:hover {
-    background-color: rgba(0, 0, 0, 0.8);
-}
-
 /* Mobile Responsive */
 @media (max-width: 768px) {
     .youtube-container {
@@ -303,20 +270,6 @@ nav ul li a:hover {
     }
 }
 
-.slides {
-    display: flex;
-    transition: transform 0.5s ease-in-out;
-    width: 100%; /* Set the width to 100% */
-}
-
-.slides iframe {
-    width: 100%; /* Make each iframe take the full width of the slides */
-    height: 315px; /* Standard YouTube height */
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    flex: 0 0 100%; /* Ensure each iframe takes full width of the container */
-}
-
 /* About Me Section */
 .about-container {
     display: flex;
@@ -324,6 +277,7 @@ nav ul li a:hover {
     align-items: center;
     padding: 40px;
     box-sizing: border-box;
+    flex-wrap: wrap; /* Allow wrapping */
 }
 
 .about-text {
@@ -369,7 +323,7 @@ nav ul li a:hover {
     }
 
     .about-photo img {
-        width: 70%;
+        width: 80%; /* Adjusted size */
         margin-top: 20px;
     }
 }
@@ -381,6 +335,7 @@ nav ul li a:hover {
     justify-content: space-between;
     padding: 40px;
     box-sizing: border-box;
+    flex-wrap: wrap; /* Allow wrapping */
 }
 
 .quora-text {
@@ -414,52 +369,21 @@ nav ul li a:hover {
     object-fit: cover;
 }
 
-/* Mobile Responsive */
-@media (max-width: 768px) {
-    .quora-container {
-        flex-direction: column;
-        text-align: center;
-    }
-
-    .quora-text {
-        padding-right: 0;
-        margin-bottom: 20px;
-    }
-
-    .quora-photo img {
-        width: 80%;
-    }
-}
-
+/* Footer Section */
 footer {
     background-color: #333;
     color: white;
+    padding: 20px;
     text-align: center;
-    padding: 20px 0;
 }
 
-.footer-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.footer-links {
-    margin-top: 10px;
-}
-
-.footer-links a {
-    color: #ffcc00; /* Bright yellow for links */
+footer a {
+    color: white;
     text-decoration: none;
     padding: 0 10px;
 }
 
-.footer-links a:hover {
-    text-decoration: underline; /* Underline on hover */
+footer a:hover {
+    text-decoration: underline;
 }
 
-.footer-links span {
-    color: white; /* Separator color */
-}

@@ -1,54 +1,57 @@
-let currentIndex = 1; // Start from the 1st real slide (after the cloned first slide)
-const slides = document.querySelector('.slides');
-const totalSlides = document.querySelectorAll('.slides iframe').length;
-const slideWidth = document.querySelector('.slider').clientWidth;
+let currentSlide = 0;
+const slides = document.querySelectorAll('.slides iframe');
+const totalSlides = slides.length;
 
-// Clone the first and last slides
-const firstSlide = slides.firstElementChild.cloneNode(true);
-const lastSlide = slides.lastElementChild.cloneNode(true);
-
-// Append and prepend clones
-slides.appendChild(firstSlide);
-slides.insertBefore(lastSlide, slides.firstElementChild);
-
-// Adjust the slider's initial position
-slides.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
-
-function nextSlide() {
-    currentIndex++;
-    slides.style.transition = 'transform 0.5s ease-in-out';
-    updateSliderPosition();
-
-    // After the transition, if it's the last cloned slide, jump back to the real first slide
-    slides.addEventListener('transitionend', () => {
-        if (currentIndex === totalSlides + 1) {
-            slides.style.transition = 'none';
-            currentIndex = 1; // Real first slide
-            slides.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
-        }
-    });
+// Function to show the current slide
+function showSlide(index) {
+    const offset = -index * 100; // Move the slides
+    document.querySelector('.slides').style.transform = `translateX(${offset}%)`;
 }
 
-function prevSlide() {
-    currentIndex--;
-    slides.style.transition = 'transform 0.5s ease-in-out';
-    updateSliderPosition();
+// Show the initial slide
+showSlide(currentSlide);
 
-    // After the transition, if it's the first cloned slide, jump back to the real last slide
-    slides.addEventListener('transitionend', () => {
-        if (currentIndex === 0) {
-            slides.style.transition = 'none';
-            currentIndex = totalSlides; // Real last slide
-            slides.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
-        }
-    });
-}
+// Next button functionality
+document.querySelector('.next').addEventListener('click', () => {
+    currentSlide = (currentSlide + 1) % totalSlides; // Cycle forward
+    showSlide(currentSlide);
+});
 
-function updateSliderPosition() {
-    slides.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
-}
+// Previous button functionality
+document.querySelector('.prev').addEventListener('click', () => {
+    currentSlide = (currentSlide - 1 + totalSlides) % totalSlides; // Cycle backward
+    showSlide(currentSlide);
+});
 
-// Automatically move to the next slide every 3 seconds
+// Automatic slide change every 5 seconds
 setInterval(() => {
-    nextSlide();
+    currentSlide = (currentSlide + 1) % totalSlides; // Cycle forward
+    showSlide(currentSlide);
 }, 5000);
+
+// Clone the first slide and append to the end for smooth looping
+const firstSlideClone = slides[0].cloneNode(true);
+document.querySelector('.slides').appendChild(firstSlideClone);
+
+// Adjust totalSlides after cloning
+totalSlides++;
+
+document.addEventListener("DOMContentLoaded", function() {
+    const quoraSection = document.getElementById('quora-answers');
+    const highlightText = document.querySelector('.highlight-text');
+
+    // Observer to trigger highlight when section is in view
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                setTimeout(() => {
+                    highlightText.classList.add('highlighted');
+                }, 4000); // Highlight after 4 seconds
+                observer.unobserve(quoraSection); // Stop observing after it has been highlighted
+            }
+        });
+    });
+
+    observer.observe(quoraSection);
+});
+
